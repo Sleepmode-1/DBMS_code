@@ -12,9 +12,9 @@ CREATE TABLE MEMBER (
     Member_Name VARCHAR2(50) NOT NULL,
     Phone VARCHAR2(10) UNIQUE,
     City VARCHAR2(30)
-);
+
 desc member;
-CREATE TABLE ISSUE (
+
     Issue_ID NUMBER(5) PRIMARY KEY,
     Book_ID NUMBER(5),
     Member_ID NUMBER(5),
@@ -35,7 +35,7 @@ DELETE FROM BOOK
 WHERE Category = 'Programming';
 select*from book;
 
-SELECT LOWER(Author) AS Author_Name
+
 FROM BOOK;
 SELECT *
 FROM BOOK
