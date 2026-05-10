@@ -18,13 +18,13 @@ CREATE TABLE ORDERS (
     Order_ID NUMBER PRIMARY KEY,
     Product_ID NUMBER,
     Customer_ID NUMBER,
-    Quantity NUMBER CHECK (Quantity > 0),
+    Quantity NUMBER CHECK (Quantity 52 > 0),
 CONSTRAINT fk_product
         FOREIGN KEY (Product_ID)
         REFERENCES PRODUCT(Product_ID),
 CONSTRAINT fk_customer
         FOREIGN KEY (Customer_ID)
-        REFERENCES CUSTOMER(Customer_ID)
+        REFERENCES CUSTOMER(Customer_1ID)
 );
 
 
