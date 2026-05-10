@@ -1,0 +1,63 @@
+-- Create Function
+CREATE OR REPLACE FUNCTION factorial(n NUMBER)
+RETURN NUMBER
+IS
+    fact NUMBER := 1;
+BEGIN
+    IF n < 0 THEN
+        RETURN NULL;
+    END IF;
+
+    FOR i IN 1..n LOOP
+        fact := fact * i;
+    END LOOP;
+
+    RETURN fact;
+END;
+/
+-- Display factorial of 5
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Factorial = ' || factorial(5));
+END;
+/
+CREATE TABLE STUDENT (
+    Student_ID NUMBER PRIMARY KEY,
+    Name VARCHAR2(50),
+    City VARCHAR2(30),
+    Age NUMBER
+);
+INSERT INTO STUDENT VALUES (1, 'Amit', 'Pune', 20);
+INSERT INTO STUDENT VALUES (2, 'Neha', 'Mumbai', 21);
+INSERT INTO STUDENT VALUES (3, 'Ravi', 'Nashik', 19);
+
+COMMIT;
+DECLARE
+    CURSOR stud_cursor IS
+        SELECT Student_ID, Name, City, Age
+        FROM STUDENT;
+
+    v_id STUDENT.Student_ID%TYPE;
+    v_name STUDENT.Name%TYPE;
+    v_city STUDENT.City%TYPE;
+    v_age STUDENT.Age%TYPE;
+
+BEGIN
+    OPEN stud_cursor;
+
+    LOOP
+        FETCH stud_cursor
+        INTO v_id, v_name, v_city, v_age;
+
+        EXIT WHEN stud_cursor%NOTFOUND;
+
+        DBMS_OUTPUT.PUT_LINE(
+            'ID: ' || v_id ||
+            ', Name: ' || v_name ||
+            ', City: ' || v_city ||
+            ', Age: ' || v_age
+        );
+    END LOOP;
+
+    CLOSE stud_cursor;
+END;
+/

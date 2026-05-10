@@ -1,0 +1,46 @@
+CREATE TABLE BOOK (
+    Book_ID NUMBER(5) PRIMARY KEY,
+    Book_Name VARCHAR2(100) NOT NULL,
+    Author VARCHAR2(50) NOT NULL,
+    Price NUMBER(8,2) CHECK (Price > 0),
+    Category VARCHAR2(30)
+);
+desc book;
+
+CREATE TABLE MEMBER (
+    Member_ID NUMBER(5) PRIMARY KEY,
+    Member_Name VARCHAR2(50) NOT NULL,
+    Phone VARCHAR2(10) UNIQUE,
+    City VARCHAR2(30)
+);
+desc member;
+CREATE TABLE ISSUE (
+    Issue_ID NUMBER(5) PRIMARY KEY,
+    Book_ID NUMBER(5),
+    Member_ID NUMBER(5),
+    Issue_Date DATE
+);
+desc issue;
+
+insert into book values(101, 'SQL Fundamentals', 'James Gosling', 550, 'Database');
+insert into book values(102, 'Python Basics', 'Guido Rossum', 450, 'Programming');
+select*from book;
+
+UPDATE BOOK
+SET Price = 600
+WHERE Book_ID = 101;
+select*from book;
+
+DELETE FROM BOOK
+WHERE Category = 'Programming';
+select*from book;
+
+SELECT LOWER(Author) AS Author_Name
+FROM BOOK;
+SELECT *
+FROM BOOK
+WHERE Book_Name LIKE '%SQL%';
+
+
+
+

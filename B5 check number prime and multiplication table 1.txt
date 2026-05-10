@@ -1,0 +1,46 @@
+CREATE OR REPLACE FUNCTION check_prime(n NUMBER)
+RETURN VARCHAR2
+IS
+    i NUMBER;
+BEGIN
+    IF n <= 1 THEN
+        RETURN 'Not Prime';
+    END IF;
+
+    FOR i IN 2..SQRT(n) LOOP
+        IF MOD(n, i) = 0 THEN
+            RETURN 'Not Prime';
+        END IF;
+    END LOOP;
+
+    RETURN 'Prime';
+END;
+/
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Result : ' || check_prime(7));
+END;
+/
+
+
+
+
+
+
+CREATE OR REPLACE PROCEDURE multiplication_table (
+    n IN NUMBER
+)
+IS
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Multiplication Table of ' || n);
+
+    FOR i IN 1..10 LOOP
+        DBMS_OUTPUT.PUT_LINE(
+            n || ' x ' || i || ' = ' || (n * i)
+        );
+    END LOOP;
+END;
+/
+BEGIN
+    multiplication_table(5);
+END;
+/
