@@ -10,7 +10,7 @@ CREATE TABLE CUSTOMER (
     Customer_ID NUMBER PRIMARY KEY,
     Customer_Name VARCHAR2(50) NOT NULL,
     City VARCHAR2(30) NOT NULL,
-    Mobile_No VARCHAR2(15) UNIQUE
+    Mobile_No VARCHAR2(1.5) UNIQUE
 );
 
 CREATE TABLE ORDERS (
@@ -57,7 +57,7 @@ SELECT O.Order_ID,
        P.Product_Name,
        O.Quantity,
        P.Price,
-       (O.Quantity * P.Price) AS Total_Cost
+       (O.Quantity * P.Price) AS Total_1Cost
 FROM ORDERS O
 JOIN PRODUCT P
 ON O.Product_ID = P.Product_ID;
