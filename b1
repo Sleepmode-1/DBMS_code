@@ -1,0 +1,67 @@
+set serveroutput on;
+CREATE OR REPLACE FUNCTION area_circle(r NUMBER)
+RETURN NUMBER
+IS
+    area NUMBER;
+BEGIN
+    area := 3.14  r * r;
+    RETURN area;
+END;
+/
+DECLARE
+    result NUMBER;
+BEGIN
+    result := area_circle(5);
+    DBMS_OUTPUT.PUT_LINE('Area = ' || result);
+END;
+/
+CREATE TABLE Stud_Marks(
+    Roll NUMBER,
+    Name VARCHAR2(50),
+    Total_Marks NUMBER
+);
+desc stud_marks;
+CREATE TABLE Result(
+    Roll NUMBER,
+    Name VARCHAR2(50),
+    Class VARCHAR2(50)
+);
+desc result;
+INSERT INTO Stud_Marks VALUES(1,'Rahul',1200);
+INSERT INTO Stud_Marks VALUES(2,'Amit',950);
+INSERT INTO Stud_Marks VALUES(3,'Sneha',850);
+
+COMMIT;
+CREATE OR REPLACE PROCEDURE proc_Grade(
+    p_roll NUMBER,
+    p_name VARCHAR2,
+    p_marks NUMBER
+)
+IS
+    v_class VARCHAR(50)
+BEGIN
+
+    IF p_marks >= 990 AND p_marks <= 1500 THEN
+        v_class := 'Distinction';
+
+    ELSIF p_marks >= 900 AND p_marks <= 989 THEN
+        v_class := 'First Class';
+
+    ELSIF p_marks >= 825 AND p_marks <= 899 THEN
+        v_class := 'Higher Second Class';
+
+    ELSE
+        v_class := 'No Class';
+
+    END IF;
+
+    INSERT INTO Result VALUES(p_roll, p_name, v_class);
+
+END;
+/
+BEGIN
+    proc_Grade(1,'Rahul',1200);
+    proc_Grade(2,'Amit',950);
+    proc_Grade(3,'Sneha',850);
+END;
+/
